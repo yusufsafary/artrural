@@ -86,6 +86,8 @@ nav {
   font-weight: 600;
   letter-spacing: 0.05em;
   color: var(--cream);
+  z-index: 200;
+  position: relative;
 }
 .logo span {
   color: var(--neon);
@@ -121,8 +123,31 @@ nav {
   border-radius: 2px;
   opacity: 1 !important;
   transition: background 0.3s !important;
+  cursor: pointer;
 }
 .nav-cta:hover { background: var(--gold) !important; }
+
+/* HAMBURGER */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 200;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.nav-toggle span {
+  width: 26px; height: 2px;
+  background: var(--cream);
+  transition: all 0.3s;
+  display: block;
+  border-radius: 2px;
+}
+.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 /* HERO */
 .hero {
@@ -173,11 +198,12 @@ nav {
   content: '';
   width: 32px; height: 1px;
   background: var(--neon);
+  flex-shrink: 0;
 }
 
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(64px, 8vw, 110px);
+  font-size: clamp(52px, 8vw, 110px);
   font-weight: 700;
   line-height: 0.92;
   letter-spacing: -0.02em;
@@ -209,6 +235,7 @@ nav {
   display: flex;
   gap: 20px;
   align-items: center;
+  flex-wrap: wrap;
   animation: fadeUp 1s ease 0.8s both;
 }
 
@@ -221,7 +248,7 @@ nav {
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  cursor: none;
+  cursor: pointer;
   border-radius: 2px;
   transition: all 0.3s;
   text-decoration: none;
@@ -237,7 +264,7 @@ nav {
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  cursor: none;
+  cursor: pointer;
   border-radius: 2px;
   transition: all 0.3s;
   text-decoration: none;
@@ -304,7 +331,6 @@ nav {
   font-weight: 500;
 }
 
-.nft-info { }
 .nft-collection {
   font-family: 'DM Mono', monospace;
   font-size: 10px;
@@ -364,7 +390,7 @@ nav {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   border-radius: 4px;
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s;
 }
 .nft-btn:hover { background: var(--neon); color: var(--soil); }
@@ -373,15 +399,16 @@ nav {
 .marquee-wrap {
   border-top: 1px solid rgba(244,233,206,0.1);
   border-bottom: 1px solid rgba(244,233,206,0.1);
-  padding: 16px 0;
+  padding: 14px 0;
   overflow: hidden;
   background: rgba(232,184,75,0.04);
 }
 .marquee-track {
   display: flex;
   gap: 0;
-  animation: marquee 25s linear infinite;
+  animation: marquee 30s linear infinite;
   white-space: nowrap;
+  align-items: center;
 }
 .marquee-item {
   font-family: 'DM Mono', monospace;
@@ -390,8 +417,8 @@ nav {
   text-transform: uppercase;
   color: var(--parchment);
   opacity: 0.5;
-  padding: 0 40px;
-  display: flex;
+  padding: 0 32px;
+  display: inline-flex;
   align-items: center;
   gap: 16px;
 }
@@ -400,6 +427,47 @@ nav {
   color: var(--neon);
   opacity: 1;
   font-size: 8px;
+}
+
+/* BUILDER CARD in marquee */
+.marquee-builder {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(168,255,62,0.08);
+  border: 1px solid rgba(168,255,62,0.35);
+  border-radius: 24px;
+  padding: 5px 14px 5px 6px;
+  margin: 0 24px;
+  flex-shrink: 0;
+}
+.builder-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--moss), var(--neon));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.builder-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.builder-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: var(--parchment);
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+.builder-handle {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--neon);
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
 /* STATS */
@@ -465,10 +533,11 @@ nav {
   content: '';
   width: 24px; height: 1px;
   background: var(--neon);
+  flex-shrink: 0;
 }
 .section-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px, 5vw, 68px);
+  font-size: clamp(36px, 5vw, 68px);
   font-weight: 700;
   line-height: 1.05;
   color: var(--cream);
@@ -663,6 +732,7 @@ nav {
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 60px;
+  gap: 20px;
 }
 .see-all {
   font-family: 'DM Mono', monospace;
@@ -675,6 +745,7 @@ nav {
   align-items: center;
   gap: 8px;
   transition: gap 0.3s;
+  white-space: nowrap;
 }
 .see-all:hover { gap: 14px; }
 
@@ -690,7 +761,7 @@ nav {
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s;
-  cursor: none;
+  cursor: pointer;
 }
 .art-card:hover {
   border-color: rgba(168,255,62,0.4);
@@ -723,7 +794,7 @@ nav {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   border-radius: 4px;
-  cursor: none;
+  cursor: pointer;
 }
 
 .card-body { padding: 24px; }
@@ -801,9 +872,10 @@ nav {
   justify-content: space-between;
   align-items: center;
   transition: border-color 0.3s;
+  gap: 16px;
 }
 .token-bar:hover { border-color: rgba(168,255,62,0.4); }
-.token-info { }
+.token-info { flex: 1; min-width: 0; }
 .token-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
@@ -820,6 +892,7 @@ nav {
 }
 .token-yield {
   text-align: right;
+  flex-shrink: 0;
 }
 .yield-num {
   font-family: 'DM Mono', monospace;
@@ -883,7 +956,7 @@ nav {
   border-radius: 12px;
   padding: 32px 28px;
   transition: all 0.4s;
-  cursor: none;
+  cursor: pointer;
 }
 .archive-item:hover {
   border-color: rgba(232,184,75,0.4);
@@ -928,7 +1001,7 @@ nav {
 }
 .cta-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(52px, 7vw, 96px);
+  font-size: clamp(44px, 7vw, 96px);
   font-weight: 700;
   line-height: 1;
   color: var(--cream);
@@ -955,6 +1028,7 @@ nav {
   gap: 16px;
   justify-content: center;
   position: relative;
+  flex-wrap: wrap;
 }
 
 /* FOOTER */
@@ -1001,6 +1075,8 @@ footer {
   align-items: center;
   padding-top: 32px;
   border-top: 1px solid rgba(244,233,206,0.06);
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .footer-copy {
   font-family: 'DM Mono', monospace;
@@ -1066,6 +1142,167 @@ footer {
   border: 1px solid rgba(232,184,75,0.1);
   pointer-events: none;
 }
+
+/* =====================
+   MOBILE RESPONSIVE
+   ===================== */
+@media (max-width: 1024px) {
+  nav { padding: 24px 40px; }
+  .hero { padding: 0 40px; }
+  .hero-card { right: 40px; width: 300px; }
+  .stats { padding: 80px 40px; }
+  .concept { padding: 100px 40px; }
+  .concept-grid { gap: 60px; }
+  .how { padding: 100px 40px; }
+  .collections { padding: 100px 40px; }
+  .dao { padding: 100px 40px; }
+  .dao-grid { gap: 60px; }
+  .archive { padding: 100px 40px; }
+  .cta { padding: 120px 40px; }
+  footer { padding: 60px 40px 40px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  /* Disable custom cursor on touch */
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+
+  /* NAV */
+  nav { padding: 20px 24px; background: rgba(28,15,7,0.98); }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(28,15,7,0.99);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 150;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { opacity: 0; transform: translateX(20px); transition: all 0.3s; }
+  .nav-links.open li { opacity: 1; transform: translateX(0); }
+  .nav-links.open li:nth-child(1) { transition-delay: 0.1s; }
+  .nav-links.open li:nth-child(2) { transition-delay: 0.15s; }
+  .nav-links.open li:nth-child(3) { transition-delay: 0.2s; }
+  .nav-links.open li:nth-child(4) { transition-delay: 0.25s; }
+  .nav-links.open li:nth-child(5) { transition-delay: 0.3s; }
+  .nav-links a { font-size: 13px; opacity: 1; }
+  .nav-cta { padding: 12px 28px; }
+
+  /* HERO */
+  .hero {
+    padding: 110px 24px 60px;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: auto;
+    gap: 0;
+  }
+  .hero-content { max-width: 100%; }
+  .hero-title { font-size: clamp(44px, 13vw, 72px); }
+  .hero-sub { font-size: 15px; max-width: 100%; margin-bottom: 40px; }
+  .hero-card {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 340px;
+    margin-top: 48px;
+    animation: none;
+  }
+  .hero-landscape { height: 35%; }
+
+  /* STATS */
+  .stats {
+    padding: 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .stat-item { padding: 40px 24px; }
+  .stat-num { font-size: 48px; }
+  .stat-unit { font-size: 22px; }
+
+  /* CONCEPT */
+  .concept { padding: 80px 24px; }
+  .concept-grid { grid-template-columns: 1fr; gap: 60px; }
+  .concept-visual { height: 340px; }
+  .cb1 { width: 150px; height: 200px; }
+  .cb2 { left: 165px; width: 130px; height: 160px; top: 30px; }
+  .cb3 { top: 230px; left: 20px; width: 240px; height: 100px; }
+  .chain-line { top: 100px; left: 145px; }
+  .cd1 { top: 95px; left: 136px; }
+  .cd2 { top: 95px; right: 165px; }
+
+  /* HOW */
+  .how { padding: 80px 24px; }
+  .how-header { margin-bottom: 50px; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step { padding: 32px 24px; }
+
+  /* COLLECTIONS */
+  .collections { padding: 80px 24px; }
+  .collections-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .card-img { height: 220px; }
+
+  /* DAO */
+  .dao { padding: 80px 24px; }
+  .dao-grid { grid-template-columns: 1fr; gap: 48px; }
+  .token-bar { flex-direction: column; align-items: flex-start; }
+  .token-yield { text-align: left; }
+  .yield-num { font-size: 18px; }
+
+  /* ARCHIVE */
+  .archive { padding: 80px 24px; }
+  .archive::before { font-size: 140px; }
+  .archive-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .archive-item { padding: 24px 20px; }
+
+  /* CTA */
+  .cta { padding: 100px 24px; }
+  .cta-actions { flex-direction: column; align-items: center; gap: 12px; }
+  .cta-actions .btn-primary,
+  .cta-actions .btn-ghost { width: 100%; max-width: 280px; text-align: center; }
+
+  /* FOOTER */
+  footer { padding: 60px 24px 40px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  /* Marquee speed on mobile */
+  .marquee-track { animation-duration: 20s; }
+}
+
+@media (max-width: 480px) {
+  /* NAV */
+  nav { padding: 18px 20px; }
+
+  /* HERO */
+  .hero { padding: 100px 20px 48px; }
+  .hero-title { font-size: clamp(40px, 14vw, 60px); }
+  .hero-actions { flex-direction: column; gap: 12px; width: 100%; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost { width: 100%; text-align: center; }
+
+  /* STEPS */
+  .steps { grid-template-columns: 1fr; }
+
+  /* ARCHIVE */
+  .archive-grid { grid-template-columns: 1fr; }
+
+  /* STATS */
+  .stat-num { font-size: 40px; }
+
+  /* FOOTER */
+  .footer-top { grid-template-columns: 1fr; }
+
+  /* Sections */
+  .concept, .how, .collections, .dao, .archive, .cta { padding-left: 20px; padding-right: 20px; }
+  footer { padding-left: 20px; padding-right: 20px; }
+}
 </style>
 </head>
 <body>
@@ -1076,12 +1313,15 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="logo">art<span>rural</span>.fun</div>
-  <ul class="nav-links">
-    <li><a href="#">Marketplace</a></li>
-    <li><a href="#">Village DAO</a></li>
-    <li><a href="#">Archive</a></li>
-    <li><a href="#">Artisans</a></li>
-    <li><a href="#" class="nav-cta">Connect Wallet</a></li>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="closeNav()">Marketplace</a></li>
+    <li><a href="#" onclick="closeNav()">Village DAO</a></li>
+    <li><a href="#" onclick="closeNav()">Archive</a></li>
+    <li><a href="#" onclick="closeNav()">Artisans</a></li>
+    <li><a href="#" class="nav-cta" onclick="closeNav()">Connect Wallet</a></li>
   </ul>
 </nav>
 
@@ -1097,11 +1337,9 @@ footer {
         <stop offset="100%" stop-color="#2E4A1C" stop-opacity="0.6"/>
       </linearGradient>
     </defs>
-    <!-- Terraced hills -->
     <path d="M0 400 L0 280 Q180 220 360 260 Q540 300 720 240 Q900 180 1080 220 Q1260 260 1440 200 L1440 400 Z" fill="#2E4A1C" opacity="0.5"/>
     <path d="M0 400 L0 320 Q200 270 400 300 Q600 330 800 290 Q1000 250 1200 280 Q1320 295 1440 260 L1440 400 Z" fill="#4A7A28" opacity="0.35"/>
     <path d="M0 400 L0 360 Q300 330 600 350 Q900 370 1200 340 Q1320 333 1440 320 L1440 400 Z" fill="#7AAF4A" opacity="0.2"/>
-    <!-- Rice stalks -->
     <g opacity="0.25" stroke="#C9993A" stroke-width="1.5" fill="none">
       <line x1="80" y1="400" x2="80" y2="300"/><line x1="85" y1="400" x2="90" y2="290"/>
       <line x1="200" y1="400" x2="200" y2="310"/><line x1="205" y1="400" x2="210" y2="295"/>
@@ -1116,7 +1354,6 @@ footer {
       <line x1="1280" y1="400" x2="1280" y2="298"/><line x1="1285" y1="400" x2="1290" y2="282"/>
       <line x1="1400" y1="400" x2="1400" y2="310"/><line x1="1405" y1="400" x2="1410" y2="294"/>
     </g>
-    <!-- Chain overlay on landscape -->
     <g opacity="0.15">
       <circle cx="200" cy="340" r="4" fill="#A8FF3E"/>
       <circle cx="400" cy="320" r="4" fill="#A8FF3E"/>
@@ -1159,7 +1396,6 @@ footer {
             </linearGradient>
           </defs>
           <rect width="300" height="200" fill="url(#g1)"/>
-          <!-- Batik-like pattern -->
           <g opacity="0.3" fill="none" stroke="#F4E9CE" stroke-width="0.8">
             <path d="M50 100 Q75 60 100 100 Q125 140 150 100 Q175 60 200 100 Q225 140 250 100"/>
             <path d="M50 80 Q75 40 100 80 Q125 120 150 80 Q175 40 200 80 Q225 120 250 80"/>
@@ -1190,26 +1426,54 @@ footer {
   </div>
 </section>
 
-<!-- MARQUEE -->
+<!-- MARQUEE TICKER with Builder Profile -->
 <div class="marquee-wrap">
   <div class="marquee-track">
     <span class="marquee-item">Batik</span>
     <span class="marquee-item">Tenun Ikat</span>
     <span class="marquee-item">Woodcarving</span>
+    <a href="https://x.com/artsignalfun" target="_blank" class="marquee-builder">
+      <div class="builder-avatar">🏗</div>
+      <div class="builder-text">
+        <span class="builder-label">Builder</span>
+        <span class="builder-handle">@artsignalfun</span>
+      </div>
+    </a>
     <span class="marquee-item">Wayang</span>
     <span class="marquee-item">Terracotta</span>
     <span class="marquee-item">Oral Tradition</span>
     <span class="marquee-item">Sacred Rituals</span>
+    <a href="https://x.com/artsignalfun" target="_blank" class="marquee-builder">
+      <div class="builder-avatar">🏗</div>
+      <div class="builder-text">
+        <span class="builder-label">Builder</span>
+        <span class="builder-handle">@artsignalfun</span>
+      </div>
+    </a>
     <span class="marquee-item">Rice Harvest Songs</span>
     <span class="marquee-item">Village DAO</span>
     <span class="marquee-item">Cultural NFTs</span>
     <span class="marquee-item">Batik</span>
     <span class="marquee-item">Tenun Ikat</span>
     <span class="marquee-item">Woodcarving</span>
+    <a href="https://x.com/artsignalfun" target="_blank" class="marquee-builder">
+      <div class="builder-avatar">🏗</div>
+      <div class="builder-text">
+        <span class="builder-label">Builder</span>
+        <span class="builder-handle">@artsignalfun</span>
+      </div>
+    </a>
     <span class="marquee-item">Wayang</span>
     <span class="marquee-item">Terracotta</span>
     <span class="marquee-item">Oral Tradition</span>
     <span class="marquee-item">Sacred Rituals</span>
+    <a href="https://x.com/artsignalfun" target="_blank" class="marquee-builder">
+      <div class="builder-avatar">🏗</div>
+      <div class="builder-text">
+        <span class="builder-label">Builder</span>
+        <span class="builder-handle">@artsignalfun</span>
+      </div>
+    </a>
     <span class="marquee-item">Rice Harvest Songs</span>
     <span class="marquee-item">Village DAO</span>
     <span class="marquee-item">Cultural NFTs</span>
@@ -1590,7 +1854,7 @@ footer {
     <div class="footer-col">
       <h4>Community</h4>
       <a href="#">Discord</a>
-      <a href="#">Twitter / X</a>
+      <a href="https://x.com/artsignalfun" target="_blank">Twitter / X</a>
       <a href="#">Mirror Blog</a>
       <a href="#">Governance Forum</a>
     </div>
@@ -1605,51 +1869,76 @@ footer {
 </footer>
 
 <script>
-  // Custom cursor
+  // HAMBURGER MENU
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navLinks.classList.toggle('open');
+    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+  });
+
+  function closeNav() {
+    navToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close nav on outside click
+  document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+      closeNav();
+    }
+  });
+
+  // Custom cursor (desktop only)
+  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
 
-  document.addEventListener('mousemove', (e) => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx - 6 + 'px';
-    cursor.style.top = my - 6 + 'px';
-  });
+  if (!isTouchDevice()) {
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx - 6 + 'px';
+      cursor.style.top = my - 6 + 'px';
+    });
 
-  function animateRing() {
-    rx += (mx - rx - 18) * 0.12;
-    ry += (my - ry - 18) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
+    function animateRing() {
+      rx += (mx - rx - 18) * 0.12;
+      ry += (my - ry - 18) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .art-card, .token-bar, .archive-item, .stat-item').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(2.5)';
+        ring.style.transform = 'translate(-12px,-12px) scale(1.5)';
+        ring.style.borderColor = 'var(--neon)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1)';
+        ring.style.transform = 'translate(-12px,-12px) scale(1)';
+        ring.style.borderColor = 'var(--gold)';
+      });
+    });
   }
-  animateRing();
-
-  // Hover effect on interactive elements
-  document.querySelectorAll('a, button, .art-card, .token-bar, .archive-item, .stat-item').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'scale(2.5)';
-      ring.style.transform = 'translate(-12px,-12px) scale(1.5)';
-      ring.style.borderColor = 'var(--neon)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'scale(1)';
-      ring.style.transform = 'translate(-12px,-12px) scale(1)';
-      ring.style.borderColor = 'var(--gold)';
-    });
-  });
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         setTimeout(() => {
           entry.target.classList.add('visible');
         }, 100);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
 
   // Counter animation
@@ -1680,7 +1969,7 @@ footer {
         nums.forEach((num, i) => {
           const span = num.querySelector('.stat-unit');
           const unit = span ? span.outerHTML : '';
-          animateCount(num, data[i].val, data[i].suffix + (unit ? '' : ''), data[i].dec);
+          animateCount(num, data[i].val, data[i].suffix, data[i].dec);
           if (span) {
             setTimeout(() => { num.innerHTML = num.textContent + unit; }, 100);
           }
